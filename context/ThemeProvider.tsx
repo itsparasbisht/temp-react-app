@@ -1,13 +1,24 @@
 "use client";
 
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
-const initialState = {
+type ThemeType = "light" | "dark";
+
+type ThemeStateType = {
+  theme: ThemeType;
+};
+
+type ThemeActionsType = {
+  type: "CHANGE_THEME";
+  payload: ThemeType;
+};
+
+const initialState: ThemeStateType = {
   theme: "light",
 };
 
-function reducer(state, action) {
-  switch (state.type) {
+function reducer(state: ThemeStateType, action: ThemeActionsType) {
+  switch (action.type) {
     case "CHANGE_THEME":
       return {
         ...state,
@@ -18,9 +29,13 @@ function reducer(state, action) {
   }
 }
 
-export const ThemeContext = createContext(null);
+const ThemeContext = createContext(initialState);
 
-function ThemeProvider({ children }) {
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+
+function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeContext.Provider value={useReducer(reducer, initialState)}>
       {children}

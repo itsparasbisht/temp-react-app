@@ -1,10 +1,9 @@
 "use client";
 
-import { ThemeContext } from "@/context/ThemeProvider";
-import { useContext } from "react";
+import { useTheme } from "@/context/ThemeProvider";
 
 export default function Home() {
-  const [themeState, updateTheme] = useContext(ThemeContext);
+  const [themeState, updateTheme] = useTheme();
 
   return (
     <div
