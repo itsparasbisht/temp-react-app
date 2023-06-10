@@ -1,23 +1,22 @@
-"use client";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 
-import { useDeferredValue, useEffect, useState, useTransition } from "react";
-
-function About() {
+function DeferInput() {
   const [name, setName] = useState("");
-  const [list, setList] = useState<string[]>([]);
   const deferredValue = useDeferredValue(name);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
   }
 
-  useEffect(() => {
+  const list = useMemo(() => {
     const l = [];
-    for (let i = 0; i < 20000; i++) {
+    for (let i = 0; i < 10000; i++) {
       l.push(deferredValue);
     }
-    setList(l);
+    return l;
   }, [deferredValue]);
+
+  useEffect(() => {}, [deferredValue]);
 
   useEffect(() => {
     console.log(`name: ${name}\ndeferred name: ${deferredValue}`);
@@ -33,4 +32,4 @@ function About() {
   );
 }
 
-export default About;
+export default DeferInput;

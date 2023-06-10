@@ -1,5 +1,6 @@
 "use client";
 
+import DeferInput from "@/components/DeferInput";
 import { useTheme } from "@/context/ThemeProvider";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <h1 style={{ color: themeState.theme === "dark" ? "white" : "black" }}>
         Welcome to our website
       </h1>
+      <DeferInput />
     </div>
   );
 }
